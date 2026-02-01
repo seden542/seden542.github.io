@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Strategic Command | World Map</title>
+    <style>
+        :root {
+            --hoi-gold: #c5a059;
+            --hoi-dark: #1b1c1e;
+            --hoi-panel: #252628;
+        }
+        body { margin: 0; background: #000; color: white; font-family: 'Courier New', monospace; overflow: hidden; }
+
+        /* 상단 자원 바 */
+        #top-bar {
+            height: 40px; background: var(--hoi-dark); border-bottom: 2px solid var(--hoi-gold);
+            display: flex; align-items: center; padding: 0 20px; z-index: 100; position: relative;
+        }
+        .res { margin-right: 25px; font-size: 0.9rem; color: var(--hoi-gold); }
+
+        /* 메인 컨테이너 */
+        #game-container { display: flex; height: calc(100vh - 40px); }
+
+        /* 왼쪽 내각/건설 패널 */
+        #side-panel {
+            width: 350px; background: var(--hoi-panel); border-right: 2px solid var(--hoi-gold);
+            padding: 15px; overflow-y: auto; z-index: 90;
+        }
+        .tab-content { display: none; margin-top: 20px; }
+        .active-tab { display: block; }
+        .tab-btn { 
+            background: #333; color: white; border: 1px solid var(--hoi-gold); 
+            padding: 5px 10px; cursor: pointer; 
+        }
+
+        /* 세계 지도 영역 */
+        #world-map {
+            flex-grow: 1; background: #2a3d4d; position: relative; 
+            overflow: hidden; cursor: grab;
+        }
+        /* 프로빈스 (땅) 예시 */
+        .province {
+            position: absolute; border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.2s; cursor: pointer;
+        }
+        .province:hover { filter: brightness(1.3); border: 1px solid white; }
+        .germany { background: #444; }
+        .usa { background: #2e4d2e; }
+        .soviet { background: #8b0000; }
+
+        /* 슬롯/공장 아이템 */
+        .build-item {
+            background: #111; border: 1px solid #444; padding: 10px; margin-bottom: 5px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+<div id="top-bar">
+    <span class="res">💎 정치력: <span id="pp-val">100</span></span>
+    <span class="res">🏭 공장: <span id="fact-val">15/20</span></span>
+    <span class="res">👥 인력: 1.2M</span>
+    <span style="margin-left: auto;">1936. 01. 01. 12:00</span>
+</div>
+
+<div id="game-container">
+    <div id="side-panel">
+        <button class="tab-btn" onclick="showTab('politics')">내각</button>
+        <button class="tab-btn" onclick="showTab('build')">건설</button>
+        
+        <div id="politics" class="tab-content active-tab">
+            <h3>정부 구성</h3>
+            <div class="build-item"><span>정치 고문: 공석</span> <button>+</button></div>
+            <div class="build-item"><span>군사 설계사: 공석</span> <button>+</button></div>
+            <hr>
+            <h3>국가 정신</h3>
+            <div style="font-size: 0.8rem; color: #aaa;">- 군국주의 (육군 경험치 +10%)</div>
+        </div>
+
+        <div id="build" class="tab-content">
+            <h3>공장 건설</h3>
+            <div class="build-item">
+                <span>군수 공장</span>
+                <button onclick="build('mil')">건설</button>
+            </div>
+            <div class="build-item">
+                <span>민간 공장</span>
+                <button onclick="build('civ')">건설</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="world-map">
+        <div class="province germany" style="top: 200px; left: 300px; width: 100px; height: 120px;" onclick="clickProv('독일 본토')">BERLIN</div>
+        <div class="province usa" style="top: 250px; left: 50px; width: 150px; height: 100px;" onclick="clickProv('워싱턴 D.C.')">USA</div>
+        <div class="province soviet" style="top: 150px; left: 450px; width: 200px; height: 150px;" onclick="clickProv('모스크바')">USSR</div>
+    </div>
+</div>
+
+<script>
+    let pp = 100;
+
+    function showTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active-tab'));
+        document.getElementById(tabId).classList.add('active-tab');
+    }
+
+    function clickProv(name) {
+        alert(name + " 지역을 선택했습니다. 작전을 지시하십시오.");
+    }
+
+    function build(type) {
+        if(pp >= 20) {
+            pp -= 20;
+            document.getElementById('pp-val').innerText = pp;
+            alert((type === 'mil' ? '군수' : '민간') + " 공장 건설 시작!");
+        } else {
+            alert("정치력이 부족합니다!");
+        }
+    }
+</script>
+
+</body>
+</html>
