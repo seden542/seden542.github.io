@@ -2,72 +2,97 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>seden542 | HOI4 HQ</title>
+    <title>HOI4: The Great Strategy | seden542</title>
     <style>
-        body {
-            background-color: #1a1a1a;
-            color: #d1d1d1;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            padding: 0;
+        :root {
+            --hoi4-gold: #c5a059;
+            --hoi4-dark: #0d0d0d;
+            --panel-bg: rgba(20, 20, 20, 0.85);
         }
-        header {
-            background: #2c3e50;
-            border-bottom: 3px solid #f39c12;
-            padding: 20px;
-            text-align: center;
+
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            background-color: black;
+            color: white; font-family: 'Times New Roman', serif;
+            overflow: hidden;
         }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #444;
-            background: #222;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+
+        /* 배경 이미지 (전쟁 느낌의 이미지나 동영상) */
+        #main-background {
+            position: absolute; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1579935110464-fcd041be62d0?q=80&w=2070&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(30%) contrast(120%);
+            z-index: -1;
         }
-        h1 { color: #f39c12; text-transform: uppercase; }
-        .menu-item {
-            display: block;
-            padding: 15px;
-            margin: 10px 0;
-            background: #333;
-            border-left: 5px solid #f39c12;
-            text-decoration: none;
-            color: #fff;
-            transition: 0.3s;
+
+        /* 메인 로고 영역 */
+        #logo-container {
+            position: absolute; top: 10%; left: 5%;
         }
-        .menu-item:hover {
-            background: #444;
-            padding-left: 25px;
+        h1 {
+            font-size: 4rem; margin: 0; color: var(--hoi4-gold);
+            text-shadow: 3px 3px 10px black; letter-spacing: 5px;
         }
-        footer {
-            text-align: center;
-            font-size: 0.8em;
-            margin-top: 50px;
-            color: #666;
+
+        /* 메뉴 패널 */
+        #menu-panel {
+            position: absolute; left: 5%; bottom: 15%;
+            width: 350px; background: var(--panel-bg);
+            border: 2px solid var(--hoi4-gold);
+            padding: 20px; box-shadow: 10px 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .menu-btn {
+            display: block; width: 100%; padding: 15px;
+            margin: 10px 0; background: #222;
+            color: #ddd; border: 1px solid #444;
+            text-align: left; font-size: 1.2rem; cursor: pointer;
+            transition: all 0.2s; position: relative;
+        }
+
+        .menu-btn:hover {
+            background: var(--hoi4-gold); color: black;
+            padding-left: 30px; font-weight: bold;
+        }
+
+        /* 하단 버전 정보 */
+        #version-info {
+            position: absolute; bottom: 10px; right: 20px;
+            color: rgba(255,255,255,0.5); font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Seden542 Strategic Command</h1>
-        <p>Hearts of Iron IV Project Archive</p>
-    </header>
 
-    <div class="container">
-        <h2>[작전 지시서]</h2>
-        <p>이곳은 seden542의 호이4 관련 프로젝트 저장소입니다. 아래 항목을 선택하십시오.</p>
-        
-        <a href="#" class="menu-item">📂 현재 개발 중인 모드 (MOD)</a>
-        <a href="#" class="menu-item">📜 국가별 최적화 빌드 가이드</a>
-        <a href="#" class="menu-item">📊 사단 편제(Division Template) 분석</a>
-        <a href="https://github.com/seden542" class="menu-item">🛠 깃허브 프로필 방문</a>
-    </div>
+<div id="main-background"></div>
 
-    <footer>
-        © 2026 seden542. All rights reserved. <br>
-        "In war, there is no substitute for victory."
-    </footer>
+<div id="logo-container">
+    <h1>STRATEGIC<br>COMMAND</h1>
+    <p style="color: #aaa; letter-spacing: 2px;">DEVELOPED BY SEDEN542</p>
+</div>
+
+<div id="menu-panel">
+    <button class="menu-btn" onclick="startGame()">새로운 게임 (NEW GAME)</button>
+    <button class="menu-btn">불러오기 (LOAD GAME)</button>
+    <button class="menu-btn">설정 (OPTIONS)</button>
+    <button class="menu-btn">크레딧 (CREDITS)</button>
+    <button class="menu-btn" onclick="window.close()">종료 (EXIT)</button>
+</div>
+
+<div id="version-info">
+    v1.0.0 Alpha - Open Beta Test
+</div>
+
+<script>
+    function startGame() {
+        alert("작전 구역으로 이동합니다...");
+        // 나중에 여기서 실제 게임 화면(지도)으로 전환하는 코드를 짤 거예요.
+        // window.location.href = 'map.html'; 
+    }
+</script>
+
 </body>
 </html>
